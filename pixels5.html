@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pixels 5</title>
+  </head>
+  <body>
+    <canvas width=700 height=500 style="border: solid 2px black;" id="cnv"></canvas>
+    <div style="width: 700px; border: solid 1px black; padding-top: 2px;  padding-bottom: 5px;">
+      Цвет: <input type="color" id="color" onblur="c.fillStyle = color.value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Толщина: <input type="number" id="width" value="15">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button onclick="c.clearRect(0, 0, cnv.width, cnv.height)">Очистить</button>
+    </div>
+    <script>
+      var c = cnv.getContext("2d")
+      var draw = false
+
+      cnv.onmousedown = ()=>{draw = true}
+      cnv.onmouseup = ()=>{draw = false}
+      cnv.onmousemove = (e)=>{
+        if(draw){
+          var x = Math.floor(e.pageX / +width.value) * +width.value
+          var y = Math.floor(e.pageY / +width.value) * +width.value
+          c.fillRect(x, y, +width.value, +width.value)
+        }
+      }
+    </script>
+  </body>
+</html>
